@@ -62,7 +62,7 @@ ll modExp(ll base, ll exp, ll m = mod7) {
 ll modInv(ll a, ll m = mod7) { return modExp(a, m - 2, m); }
 
 void solve() { 
-    
+
 }
 
 int main() {
