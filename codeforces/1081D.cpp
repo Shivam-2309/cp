@@ -50,29 +50,8 @@ ll modInv(ll a, ll m = mod7) { return modExp(a, m - 2, m); }
     Algorithm
 */
 
-int f(int i, int n, int k, vector<int> &h, vector<int> &dp){
-    if(i == n) return 0;
-    if(i >= n) return INT_MAX;
-
-    if(dp[i] != INT_MAX) return dp[i];
-
-    int ans = INT_MAX;
-    for(int j = 1; j <= k; j++){
-        int cost = abs(h[i + j] - h[i]) + f(i + j, n, k, h, dp);
-        ans = min(ans, cost);
-    }
-
-    return dp[i] = ans;
-} 
-
 void solve() { 
-    // input is taken
-    int n, k; cin >> n >> k;
-    vector<int> h(n);
-    // heights taken
-    for(int i = 0; i < n; i++) cin >> h[i];
-    vector<int> dp(n + 1, INT_MAX);
-    cout << f(0, n, k, h, dp) << endl;
+    
 }
 
 int main() {
