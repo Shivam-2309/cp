@@ -51,24 +51,70 @@ ll modInv(ll a, ll m = mod7) { return modExp(a, m - 2, m); }
 */
 
 void solve() { 
-    ll n, x; cin >> n >> x;
-    vector<ll> c(n);
-    for(ll i = 0; i < n; i++) cin >> c[i];
+    ll n; cin >> n;
+    vector<ll> v(n);
+    for(ll i = 0; i < n; i++) cin >> v[i];
+    vector<ll> p = v;
+    for(ll i = 1; i < n; i++) p[i] += p[i - 1];
+    vector<ll> a = v;
+    sort(a.begin(), a.end());
+    ll ans = 0;
+    vector<ll> suff = v;
+    for(ll i = n - 2; i >= 0; i--) suff[i] = min(suff[i], suff[i + 1]);
+    // print(suff);
+    for(ll h = 1; h <= a.back(); h++){
+        // find first index from the back such that the value is strictly less than h
+        ll lo = 0;
+        ll hi = n - 1;
+        ll idx = n;
 
-    vector<ll> dp(x + 1, 0);
-    // dp[i] : number of ways to make the sum = 0
-    dp[0] = 1;
-    for(ll i = 0; i < n; i++){
-        // mtlb ith coin leleta hu
-        ll coin = c[i];
-        // ab iss coin se value bnane ki koshish krta hu
-        for(ll j = 1; j <= x; j++){
-            if(j - coin >= 0) dp[j] += dp[j - coin];
-            dp[j] = dp[j] % mod7;
+        while(lo <= hi){
+            ll mid = (lo + hi)/2LL;
+            if(suff[mid] >= h){
+                idx = mid;
+                hi = mid - 1;
+            }
+            else{
+                lo = mid + 1;
+            }
         }
-        // print(dp);
+        // debug(idx);
+        ll intact = (n - idx);
+        // debug(intact);
+        ll tot = n - (lower_bound(a.begin(), a.end(), h) - a.begin());
+        ll hile = (tot - intact);
+        ans += hile;
+        // debug(hile);
+    }   
+    // debug(ans);
+    ll res = ans;
+    // uthane ka faeda sirf tbhi h jb usko htane ke baad kuch effect aaye.
+    // iska mtlb hatao sirf tbhi agr vo ek suffix minimum ho.
+    // print(suff);
+    for(ll i = n - 1; i >= 0; i--){
+        if(v[i] != suff[i]) continue;
+        // mtlb htake kuch acha ho skta h !!
+        // debug(i);
+        ll lo = 0;
+        ll hi = i;
+        ll idx = i;
+        while(lo <= hi){
+            ll mid = (lo + hi)/2LL;
+            if(suff[mid] >= v[i]){
+                idx = mid;
+                hi = mid - 1;
+            }
+            else{
+                lo = mid + 1;
+            }
+        }
+        // debug(idx);
+        ll hile = (i - idx);
+        ll better = res + hile;
+        // debug(better);
+        ans = max(ans, better);
     }
-    cout << dp[x] << endl;
+    cout << ans << endl;
 }
 
 int main() {
@@ -77,7 +123,7 @@ int main() {
         freopen("Error.txt", "w", stderr);
     #endif
     ll t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--) solve();
     return 0;
 }
