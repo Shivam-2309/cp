@@ -1,7 +1,76 @@
+# macOS
+.DS_Store
+
+# Compiled executables
 a.out
+*.out
+*.exe
+
+# Object files
+*.o
+*.obj
+
+# Static/Dynamic libraries
+*.a
+*.so
+*.dylib
+
+# Debug symbols (macOS)
+*.dSYM/
+*.dSYM
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+compile_commands.json
+
+# VS Code
+.vscode/
+
+# CLion / JetBrains
+.idea/
+
+# Temporary files
+*.log
+*.tmp
+*.swp
+*.swo
+
+# Your debug/output files
+Error.txt
+
+# macOS
+.DS_Store
+
+# Executables
+*.out
+*.exe
+*.bin
+a.out
+
+# Object files
+*.o
+*.obj
+
+# macOS debug symbols
+*.dSYM/
+
+# Hidden temporary files created by VS Code / extensions
+.*
+
+# But DON'T ignore git files
+!.gitignore
+!.gitkeep
+
+# VS Code
+.vscode/
+
+# JetBrains
+.idea/
+
+# Logs
+*.log
 Error.txt
 mainContest
-mainContest.*
-mainContest.bin
-mainContest.dSYM
-*.dSYM/
